@@ -1,0 +1,58 @@
+CREATE DATABASE SmartParkingDB;
+
+USE SmartParkingDB;
+
+CREATE TABLE ParkingLot (
+    ParkingLotID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Location VARCHAR(200),
+    TotalSlots INT,
+    AvailableSlots INT
+);
+
+CREATE TABLE ParkingSlot (
+    SlotID INT PRIMARY KEY,
+    ParkingLotID INT,
+    SlotNumber VARCHAR(10),
+    SlotType VARCHAR(50),
+    Status VARCHAR(20),
+    FOREIGN KEY (ParkingLotID) REFERENCES ParkingLot(ParkingLotID)
+);
+
+CREATE TABLE Vehicle (
+    VehicleID INT PRIMARY KEY,
+    OwnerName VARCHAR(100),
+    VehicleNumber VARCHAR(20) UNIQUE,
+    VehicleType VARCHAR(50),
+    ContactNumber VARCHAR(15)
+);
+
+CREATE TABLE Booking (
+    BookingID INT PRIMARY KEY,
+    VehicleID INT,
+    SlotID INT,
+    StartTime DATETIME,
+    EndTime DATETIME,
+    Status VARCHAR(20),
+    PaymentStatus VARCHAR(20),
+    FOREIGN KEY (VehicleID) REFERENCES Vehicle(VehicleID),
+    FOREIGN KEY (SlotID) REFERENCES ParkingSlot(SlotID)
+);
+
+CREATE TABLE Payment (
+    PaymentID INT PRIMARY KEY,
+    BookingID INT,
+    Amount DECIMAL(10,2),
+    PaymentMode VARCHAR(50),
+    PaymentDate DATETIME,
+    FOREIGN KEY (BookingID) REFERENCES Booking(BookingID)
+);
+
+CREATE TABLE Admin (
+    AdminID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Password VARCHAR(50),
+    ParkingLotID INT,
+    FOREIGN KEY (ParkingLotID) REFERENCES ParkingLot(ParkingLotID)
+);
