@@ -42,3 +42,9 @@ Booking: PK = BookingID – FK = VehicleID, SlotID – Attributes = StartTime, E
 Payment: PK = PaymentID – FK = BookingID – Attributes = Amount, PaymentMode, PaymentDate
 
 Admin (optional): PK = AdminID – FK = ParkingLotID – Attributes = Name, Email, Password
+
+
+ER-Diagram
+
+<img width="1920" height="835" alt="ER-Diagram" src="https://github.com/user-attachments/assets/a8e31a7f-6adc-4b17-903b-f3e036f686ec" />
+
